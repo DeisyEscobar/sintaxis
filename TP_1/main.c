@@ -1,50 +1,31 @@
 
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include "scanner.h"
 
 int main( void )
 {
    
    //DECLARO VECTOR
-   char buf[100];
+   char buffer[200];
    char ch;
    int token;
    int i =  0 ;
   
-    while ((ch = getchar()) != EOF ) {
-    	
-		while ((isspace(ch) )==0 && ch != ','){
-    		buf[i] = ch;    
-    		i++;
-    		ch = getchar();
-    		
-    	}
-		
-		if (i>0 && strlen(buf)>0 )
-		{
-		buf[i]= '\0';
-		token = get_token(buf);
-		}
-		
-		if (ch == ',')
-		{
-			i=0;
-		    buf[i] = ch;
-		    buf[i+1]= '\0';
-		    token = get_token(buf);
-		}      
-	i= 0;
+    while ((token = get_token(buffer)) != FDT ) {
+
+
+	 switch (token) {
+		case SEP : 
+			printf(" Separador : %s \n ",buffer);
+		break;
+		case CAD : 
+			printf(" Cadena :%s \n ",buffer);
+	    break;
+	                }
 	   
-  }
-  
+   }
 
-if (ch == EOF){
+printf(" Fin de texto  \n " );
 
-	buf[0]= '\0';
-	token =  get_token(buf) ;  
-
-}
   return 0;
 }
